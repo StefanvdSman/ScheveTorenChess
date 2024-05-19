@@ -1,11 +1,11 @@
-import { Avatar, Button, Dropdown, Navbar, TextInput } from 'flowbite-react'
+import { Avatar, Button, Dropdown, Navbar, NavbarBrand, TextInput } from 'flowbite-react'
 import { Link, useLocation } from 'react-router-dom'
 import {AiOutlineSearch} from 'react-icons/ai'
 import {FaMoon, FaSun} from 'react-icons/fa'
 export default function Header() {
     const path = useLocation().pathname;
   return (
-    <Navbar className='border-b-2'>
+    <Navbar fluid rounded className='border-b-2'>
         <Link
          to='/'
          className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'>
@@ -32,24 +32,19 @@ export default function Header() {
                     Sign In
                 </Button>
             </Link>
+            <Navbar.Toggle/>
+        </div>
             <Navbar.Collapse>
-                <Navbar.Link>
-                    <Link to='/'>
-                        Home
-                    </Link>
+                <Navbar.Link active={path === '/'} href='/'>
+                    Home
                 </Navbar.Link>
-                <Navbar.Link>
-                    <Link to='/about'> 
-                        About
-                    </Link>
+                <Navbar.Link active={path === '/about'} href='/about'>
+                    About
                </Navbar.Link>
-                <Navbar.Link>
-                    <Link to='/projects'>
+                <Navbar.Link active={path === '/projects'} href='/projects'>                   
                         Projects
-                    </Link>
                 </Navbar.Link>
             </Navbar.Collapse>
-        </div>
     </Navbar>
   )
 }
