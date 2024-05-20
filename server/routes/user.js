@@ -5,14 +5,14 @@ import { ObjectId } from 'mongodb';
 const router = express.Router();
 
 router.get('/', async (_, res) => {
-  let collection = await db.collection('records');
+  let collection = await db.collection('users');
   let results = await collection.find({}).toArray();
   res.send(results).status(200);
 });
 
 router.get('/:id', async (req, res) => {
   try {
-    let collection = await db.collection('records');
+    let collection = await db.collection('users');
     let query = { _id: new ObjectId(req.params.id) };
     let results = await collection.findOne(query);
 
@@ -20,7 +20,7 @@ router.get('/:id', async (req, res) => {
     else res.send(results).status(200);
   } catch (err) {
     console.error(err);
-    res.status(500).send('Error getting record');
+    res.status(500).send('Error getting user');
   }
 });
 
@@ -32,12 +32,12 @@ router.post('/', async (req, res) => {
       level: req.body.level,
     };
 
-    let collection = await db.collection('records');
+    let collection = await db.collection('users');
     let results = await collection.insertOne(newDocument);
     res.send(results).status(204);
   } catch (err) {
     console.error(err);
-    res.status(500).send('Error adding record');
+    res.status(500).send('Error adding user');
   }
 });
 
@@ -51,24 +51,24 @@ router.patch('/:id', async (req, res) => {
         level: req.body.level,
       },
     };
-    let collection = await db.collection('records');
+    let collection = await db.collection('users');
     let results = await collection.updateOne(query, updates);
     res.send(results).status(200);
   } catch (err) {
     console.error(err);
-    res.status(500).send('Error updating record');
+    res.status(500).send('Error updating user');
   }
 });
 
 router.delete('/:id', async (req, res) => {
   try {
     const query = { _id: ObjectId(req.params.id) };
-    const collection = db.collection('records');
+    const collection = db.collection('users');
     let results = await collection.deleteOne(query);
     res.send(results).status(200);
   } catch (err) {
     console.error(err);
-    res.status(500).send('Error deleting record');
+    res.status(500).send('Error deleting user');
   }
 });
 
