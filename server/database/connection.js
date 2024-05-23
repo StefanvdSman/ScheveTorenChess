@@ -17,5 +17,5 @@ try {
   console.log(err);
 }
 
-let db = client.db('employees');
+let db = client.db('ScheveTorenBlog');
 export default db;
