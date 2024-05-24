@@ -20,7 +20,11 @@ export default function SignUp() {
             </div>
             <div>
               <Label value='Your email' />
-              <TextInput placeholder='Email' id='email' type='text' />
+              <TextInput
+                placeholder='name@example.com'
+                id='email'
+                type='text'
+              />
             </div>
             <div>
               <Label value='Your password' />
