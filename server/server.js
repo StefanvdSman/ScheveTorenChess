@@ -11,6 +11,13 @@ app.use('/api/record', records);
 app.use('/api/user', users);
 app.use('/api/auth', auth);
 
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || 'Internal server error';
+  res
+    .status(statusCode)
+    .json({ succes: false, statusCode: statusCode, message: message });
+});
 // start the express server
 app.listen(PORT, () => {
   console.log(`Server is listening on port: ${PORT}`);
