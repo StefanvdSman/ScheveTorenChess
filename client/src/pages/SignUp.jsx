@@ -1,11 +1,12 @@
 import { Alert, Button, Label, Spinner, TextInput } from 'flowbite-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../components/Logo';
-import { useState } from 'react';
+import React, { useState } from 'react';
 export default function SignUp() {
   const [formData, setFormData] = useState({});
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const HandleChange = (event) => {
     setFormData({
       ...formData,
@@ -25,8 +26,11 @@ export default function SignUp() {
         body: JSON.stringify(formData),
       });
       res.json().then((res) => {
+        //TODO: change hardcoded message
         setErrorMessage(res.message === 'Signup successful' ? '' : res.message);
-        console.log(res);
+        if (res.message === 'Signup successful') {
+          navigate('/signin');
+        }
         setLoading(false);
       });
     } catch (err) {
